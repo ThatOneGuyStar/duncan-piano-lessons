@@ -1,248 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elijah Duncan - Piano Lessons</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN for utility-first styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Font: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Font: Inter for a clean, professional typeface -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light gray background */
+            background-color: #111827; /* Fallback color */
+            color: #d1d5db; /* Light gray text for readability */
+            /* Added a background image with a dark overlay for text readability */
+            background-image: linear-gradient(rgba(17, 24, 39, 0.92), rgba(17, 24, 39, 0.97)), url('https://images.pexels.com/photos/164743/pexels-photo-164743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Creates a parallax effect */
         }
-        /* Custom scrollbar for a cleaner look */
+        /* Custom scrollbar for a refined look in the dark theme */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
+            background: #1f2937; /* Darker gray for scrollbar track */
         }
         ::-webkit-scrollbar-thumb {
-            background: #888;
+            background: #4b5563; /* Muted gray for thumb */
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #6b7280; /* Lighter gray on hover */
+        }
+        /* Style for focused form elements */
+        .form-input:focus {
+            ring-color: #60a5fa; /* A soft blue for focus rings */
+            border-color: #60a5fa;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="antialiased">
 
-    <!-- Header/Navigation -->
-    <header class="bg-white shadow-sm py-4 fixed w-full z-10 top-0">
-        <nav class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-indigo-700 rounded-md p-2 hover:bg-indigo-50 transition-colors">Elijah Duncan</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#about" class="text-gray-600 hover:text-indigo-700 font-medium transition-colors p-2 rounded-md hover:bg-indigo-50">About</a>
-                <a href="#lessons" class="text-gray-600 hover:text-indigo-700 font-medium transition-colors p-2 rounded-md hover:bg-indigo-50">Lessons</a>
-                <a href="#contact" class="text-gray-600 hover:text-indigo-700 font-medium transition-colors p-2 rounded-md hover:bg-indigo-50">Book a Lesson</a>
+    <!-- Header and Navigation Bar: Minimalist and fixed -->
+    <header class="bg-gray-900/70 backdrop-blur-lg py-4 fixed w-full z-10 top-0 border-b border-gray-700/50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Site Name: Links to the top -->
+            <a href="#" class="text-xl font-bold text-white rounded-md p-2 hover:text-blue-400 transition-colors">Elijah Duncan</a>
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex items-center space-x-2">
+                <a href="#about" class="text-gray-300 hover:text-blue-400 font-medium transition-colors py-2 px-3 rounded-md">About</a>
+                <a href="#lessons" class="text-gray-300 hover:text-blue-400 font-medium transition-colors py-2 px-3 rounded-md">Lessons</a>
+                <a href="#contact" class="text-gray-300 bg-blue-600 hover:bg-blue-700 font-medium transition-colors py-2 px-4 rounded-full">Book a Lesson</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md p-2">
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-blue-400 focus:outline-none rounded-md p-2">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </nav>
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white bg-opacity-95 z-20 flex flex-col items-center justify-center space-y-6">
-            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md p-2">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
-            <a href="#about" class="text-3xl text-gray-800 hover:text-indigo-700 font-semibold transition-colors py-2" onclick="closeMobileMenu()">About</a>
-            <a href="#lessons" class="text-3xl text-gray-800 hover:text-indigo-700 font-semibold transition-colors py-2" onclick="closeMobileMenu()">Lessons</a>
-            <a href="#contact" class="text-3xl text-gray-800 hover:text-indigo-700 font-semibold transition-colors py-2" onclick="closeMobileMenu()">Book a Lesson</a>
-        </div>
     </header>
 
-    <main class="pt-16"> <!-- Padding to account for fixed header -->
+    <!-- Mobile Menu Overlay: Full-screen, dark theme -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 z-20 flex flex-col items-center justify-center space-y-8">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-400 hover:text-blue-400 focus:outline-none rounded-md p-2">
+            <i class="fas fa-times text-3xl"></i>
+        </button>
+        <a href="#about" class="text-3xl text-gray-200 hover:text-blue-400 font-semibold transition-colors" onclick="closeMobileMenu()">About</a>
+        <a href="#lessons" class="text-3xl text-gray-200 hover:text-blue-400 font-semibold transition-colors" onclick="closeMobileMenu()">Lessons</a>
+        <a href="#contact" class="text-3xl text-gray-200 hover:text-blue-400 font-semibold transition-colors" onclick="closeMobileMenu()">Book a Lesson</a>
+    </div>
 
-        <!-- Hero Section -->
-        <section id="hero" class="relative bg-gradient-to-br from-indigo-700 to-purple-800 text-white py-20 md:py-32 flex items-center justify-center min-h-[60vh] overflow-hidden">
-            <!-- Background pattern/texture can be added here -->
-            <div class="absolute inset-0 opacity-10" style="background-image: url('https://placehold.co/1920x1080/ffffff/000000?text=Piano+Keys+Pattern'); background-size: cover; background-position: center;"></div>
+    <!-- Main Content Area: Centered, single-column layout for readability -->
+    <main class="pt-24 sm:pt-32">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="container mx-auto px-4 text-center relative z-10">
-                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">
-                    Unlock Your Musical Potential
+            <!-- Hero Section: Clean, text-focused introduction -->
+            <section id="hero" class="text-center py-16">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+                    Piano Lessons for the Modern Musician
                 </h1>
-                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 animate-fade-in-up">
-                    Personalized piano lessons for all ages and skill levels, from beginner to advanced.
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Personalized instruction for all ages and skill levels, focused on building a lifelong love for music.
                 </p>
-                <a href="#contact" class="bg-white text-indigo-700 hover:bg-indigo-100 font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 animate-bounce-in">
+                <a href="#contact" class="text-blue-400 hover:text-blue-300 font-semibold text-lg group">
                     Book Your First Lesson
+                    <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
                 </a>
-            </div>
-        </section>
+            </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
-                    <!-- Image of Elijah Duncan playing piano -->
-                    <!-- IMPORTANT: Ensure 'image.png' is in the same directory as your index.html file -->
-                    <img src="image.png" alt="Elijah Duncan playing piano" class="rounded-2xl shadow-xl transform hover:scale-102 transition-transform duration-300 w-full h-auto object-cover">
-                </div>
-                <div class="md:w-1/2 text-center md:text-left">
-                    <h2 class="text-4xl font-bold text-indigo-800 mb-6">About Elijah Duncan</h2>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        Hello! I'm Elijah Duncan, a passionate pianist and dedicated educator with over 10 years of experience teaching piano to students of all ages. My journey with the piano began at a young age, leading me to pursue a degree in Music Performance from [Your University Name].
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        I believe that learning piano should be an enjoyable and rewarding experience. My teaching philosophy focuses on building a strong foundation in technique, theory, and musicality, while also tailoring lessons to each student's individual goals and interests. Whether you dream of playing classical masterpieces, jazz improvisations, or contemporary pop songs, I'm here to guide you.
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        Join me to discover the joy of making music!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Lessons Section -->
-        <section id="lessons" class="py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl font-bold text-indigo-800 mb-12">My Lesson Offerings</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Lesson Type 1 -->
-                    <div class="bg-white rounded-2xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <i class="fas fa-child text-5xl text-indigo-600 mb-6"></i>
-                        <h3 class="2xl font-semibold text-gray-900 mb-4">Beginner Piano</h3>
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            Start your musical journey with fundamental concepts: note reading, basic chords, rhythm, and simple melodies. Perfect for absolute beginners.
-                        </p>
-                        <ul class="text-left text-gray-600 space-y-2 mb-6">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> No prior experience needed</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Fun and engaging curriculum</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Age-appropriate learning</li>
-                        </ul>
-                        <button class="bg-indigo-600 text-white py-2 px-6 rounded-full hover:bg-indigo-700 transition-colors shadow-md">Learn More</button>
-                    </div>
-
-                    <!-- Lesson Type 2 -->
-                    <div class="bg-white rounded-2xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <i class="fas fa-music text-5xl text-indigo-600 mb-6"></i>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Intermediate & Advanced</h3>
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            Refine your technique, explore advanced repertoire, delve into music theory, and develop your unique musical voice.
-                        </p>
-                        <ul class="text-left text-gray-600 space-y-2 mb-6">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Technique refinement</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Advanced theory & harmony</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Repertoire expansion</li>
-                        </ul>
-                        <button class="bg-indigo-600 text-white py-2 px-6 rounded-full hover:bg-indigo-700 transition-colors shadow-md">Learn More</button>
-                    </div>
-
-                    <!-- Lesson Type 3 -->
-                    <div class="bg-white rounded-2xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                        <i class="fas fa-headphones-alt text-5xl text-indigo-600 mb-6"></i>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Music Theory & Composition</h3>
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            Understand the language of music. Learn harmony, counterpoint, form, and even begin composing your own pieces.
-                        </p>
-                        <ul class="text-left text-gray-600 space-y-2 mb-6">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Deepen musical understanding</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Develop compositional skills</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Enhance improvisation</li>
-                        </ul>
-                        <button class="bg-indigo-600 text-white py-2 px-6 rounded-full hover:bg-indigo-700 transition-colors shadow-md">Learn More</button>
+            <!-- About Section: Professional bio with image -->
+            <section id="about" class="py-16 md:py-24">
+                <div class="bg-gray-900/60 backdrop-blur-sm p-8 rounded-2xl border border-gray-800/50">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                        <!-- Image Column -->
+                        <div class="w-full md:w-1/3 flex-shrink-0">
+                            <!-- Replaced placeholder with the direct image link -->
+                            <img src="https://i.postimg.cc/Y2nNYXK1/PXL-20240824-185836764.jpg" alt="A photo of Elijah Duncan" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                        </div>
+                        <!-- Text Column -->
+                        <div class="w-full md:w-2/3">
+                            <h2 class="text-3xl font-bold text-white mb-6 text-center md:text-left">About Me</h2>
+                            <div class="space-y-4 text-lg text-gray-300 leading-relaxed">
+                                <p>
+                                    Hello! I'm Elijah Duncan, a passionate pianist and dedicated educator. I am currently a high school student at Walter Johnson High School, where I am deeply immersed in music education. I am taking AP Music Theory, a college-level music theory class, and the highest level piano class offered by my school. I am also an active member of my symphonic band.
+                                </p>
+                                <p>
+                                    My teaching philosophy focuses on building a strong foundation in technique, theory, and musicality, while also tailoring lessons to each student's individual goals and interests. Whether you dream of playing classical masterpieces, jazz improvisations, or contemporary pop songs, I'm here to guide you.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contact/Booking Section -->
-        <section id="contact" class="py-16 md:py-24 bg-indigo-700 text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl font-bold mb-12">Book Your Piano Lesson</h2>
-                <p class="text-lg mb-8 max-w-2xl mx-auto opacity-90">
-                    Ready to start your musical journey? Fill out the form below and I'll get back to you to schedule your first lesson!
-                </p>
-                <div class="max-w-xl mx-auto bg-white text-gray-800 p-8 rounded-2xl shadow-xl">
+            <!-- Lessons Section: Simplified, content-first presentation -->
+            <section id="lessons" class="py-16 md:py-24">
+                 <div class="bg-gray-900/60 backdrop-blur-sm p-8 rounded-2xl border border-gray-800/50">
+                    <h2 class="text-3xl font-bold text-white mb-12 text-center">Lesson Offerings</h2>
+                    <div class="space-y-12">
+                        <!-- Lesson Type 1 -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-400 mb-3">Beginner Piano</h3>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                Start your musical journey with fundamental concepts: note reading, basic chords, rhythm, and simple melodies. Perfect for absolute beginners with no prior experience.
+                            </p>
+                        </div>
+                        <!-- Lesson Type 2 -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-400 mb-3">Intermediate & Advanced</h3>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                For students with some experience, we'll refine your technique, explore advanced repertoire, delve into music theory, and develop your unique musical voice.
+                            </p>
+                        </div>
+                        <!-- Lesson Type 3 -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-400 mb-3">Music Theory & Composition</h3>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                Understand the language of music. Learn harmony, counterpoint, form, and even begin composing your own pieces to deepen your musical understanding and enhance improvisation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact/Booking Section: Styled for the dark theme -->
+            <section id="contact" class="py-16 md:py-24">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-white">Book Your Piano Lesson</h2>
+                    <p class="text-lg mt-4 mb-10 max-w-2xl mx-auto text-gray-300">
+                        Ready to start? Fill out the form below and I'll get back to you to schedule your first lesson!
+                    </p>
+                </div>
+                <div class="max-w-xl mx-auto bg-gray-800/70 p-8 rounded-2xl border border-gray-700 backdrop-blur-sm">
                     <form id="bookingForm" class="space-y-6">
                         <div>
-                            <label for="name" class="block text-left text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                            <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-base transition-colors">
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
+                            <input type="text" id="name" name="name" required class="form-input mt-1 block w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
                         </div>
                         <div>
-                            <label for="email" class="block text-left text-sm font-medium text-gray-700 mb-1">Your Email</label>
-                            <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-base transition-colors">
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Your Email</label>
+                            <input type="email" id="email" name="email" required class="form-input mt-1 block w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
                         </div>
                         <div>
-                            <label for="phone" class="block text-left text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
-                            <input type="tel" id="phone" name="phone" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-base transition-colors">
-                        </div>
-                        <div>
-                            <label for="lessonType" class="block text-left text-sm font-medium text-gray-700 mb-1">Desired Lesson Type</label>
-                            <select id="lessonType" name="lessonType" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-base transition-colors">
-                                <option value="">Select a lesson type</option>
-                                <option value="Beginner Piano">Beginner Piano</option>
-                                <option value="Intermediate Piano">Intermediate Piano</option>
-                                <option value="Advanced Piano">Advanced Piano</option>
-                                <option value="Music Theory & Composition">Music Theory & Composition</option>
-                                <option value="Other">Other (Please specify in message)</option>
+                            <label for="lessonType" class="block text-sm font-medium text-gray-300 mb-1">Desired Lesson Type</label>
+                            <select id="lessonType" name="lessonType" class="form-input mt-1 block w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <option>Select a lesson type</option>
+                                <option>Beginner Piano</option>
+                                <option>Intermediate Piano</option>
+                                <option>Advanced Piano</option>
+                                <option>Music Theory & Composition</option>
+                                <option>Other (Please specify in message)</option>
                             </select>
                         </div>
                         <div>
-                            <label for="message" class="block text-left text-sm font-medium text-gray-700 mb-1">Your Message / Questions</label>
-                            <textarea id="message" name="message" rows="5" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-base transition-colors"></textarea>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Your Message / Questions</label>
+                            <textarea id="message" name="message" rows="5" class="form-input mt-1 block w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-full hover:bg-indigo-700 transition-colors shadow-lg transform hover:scale-105">
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-all shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500">
                             Send Booking Request
                         </button>
                     </form>
                     <div id="form-message" class="mt-4 text-center text-sm font-medium hidden"></div>
                 </div>
-                <p class="text-sm mt-8 opacity-80">
-                    *Note: Submitting this form will open your default email client with the details pre-filled.
+                <p class="text-xs text-center mt-6 text-gray-500">
+                    *Submitting this form will open your default email client.
                 </p>
-            </div>
-        </section>
+            </section>
 
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-10">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-4">&copy; 2024 Elijah Duncan Piano. All rights reserved.</p>
+    <!-- Footer: Minimalist and clean -->
+    <footer class="bg-gray-900/80 border-t border-gray-800 mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-500">
             <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-youtube text-xl"></i></a>
+                 <a href="https://www.instagram.com/elijahmusicaccount" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                 <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-youtube text-xl"></i></a>
             </div>
-            <p class="text-sm text-gray-500">Designed with <i class="fas fa-heart text-red-500"></i> by Your Name/Company</p>
+            <p>&copy; 2024 Elijah Duncan Piano. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // JavaScript for mobile menu toggle functionality
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const closeMobileMenuButton = document.getElementById('close-mobile-menu');
         const mobileMenu = document.getElementById('mobile-menu');
 
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.remove('hidden');
-        });
-
-        closeMobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
         });
 
         function closeMobileMenu() {
             mobileMenu.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
         }
+        
+        closeMobileMenuButton.addEventListener('click', closeMobileMenu);
 
-        // Form submission handler
+        // JavaScript for handling the booking form submission
         document.getElementById('bookingForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
 
+            // Get form input values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
             const lessonType = document.getElementById('lessonType').value;
             const message = document.getElementById('message').value;
             const formMessage = document.getElementById('form-message');
@@ -253,26 +240,25 @@
             const body = encodeURIComponent(
                 `Name: ${name}\n` +
                 `Email: ${email}\n` +
-                `Phone: ${phone ? phone : 'N/A'}\n` +
                 `Desired Lesson Type: ${lessonType ? lessonType : 'Not specified'}\n\n` +
                 `Message:\n${message}`
             );
 
             const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
-            // Attempt to open the mailto link
+            // Display feedback to the user
+            formMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
             try {
                 window.location.href = mailtoLink;
-                formMessage.textContent = 'Your email client should open shortly with the booking details. Please send the email from there.';
-                formMessage.classList.remove('hidden', 'text-red-500');
-                formMessage.classList.add('text-green-600');
-                // Clear the form after a short delay, assuming the user will send the email
+                formMessage.textContent = 'Your email client should open shortly. Please send the pre-filled email.';
+                formMessage.classList.add('text-green-500');
+                // Reset the form after a delay
                 setTimeout(() => {
                     this.reset();
-                }, 3000);
+                    formMessage.classList.add('hidden');
+                }, 4000);
             } catch (e) {
-                formMessage.textContent = 'Could not open email client. Please copy the details and send an email manually to elijah.ryan.duncan@gmail.com';
-                formMessage.classList.remove('hidden', 'text-green-600');
+                formMessage.textContent = 'Could not open email client. Please send an email manually to elijah.ryan.duncan@gmail.com';
                 formMessage.classList.add('text-red-500');
                 console.error("Failed to open mailto link:", e);
             }
